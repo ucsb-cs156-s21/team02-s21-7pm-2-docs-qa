@@ -1,0 +1,16 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import AboutPage from "main/pages/AboutPage";
+
+<Meta title="pages/AboutPage" component={AboutPage} />
+
+# AboutPage
+
+The `AboutPage` contains general information about the app.
+
+export const Template = (args) => <AboutPage {...args} />
+
+<Canvas>
+  <Story name="Example" args={{ label: 'Example' }}>
+    {Template.bind({})}
+   </Story>
+</Canvas>

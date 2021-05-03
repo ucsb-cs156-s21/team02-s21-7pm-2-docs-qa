@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -jar target/demo-spring-backend-1.0.0.jar
+web: java $JAVA_OPTS -jar target/team02-1.0.0.jar

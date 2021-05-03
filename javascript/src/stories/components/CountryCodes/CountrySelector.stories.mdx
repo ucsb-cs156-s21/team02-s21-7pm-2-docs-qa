@@ -1,0 +1,41 @@
+import { Meta, Story, Canvas } from "@storybook/addon-docs/blocks";
+import CollegeSubredditSelector from "main/components/CollegeSubreddits/CollegeSubredditSelector";
+import collegeSubredditFixtures from "fixtures/collegeSubredditFixtures";
+
+<Meta
+  title="components/CollegeSubreddits/CollegeSubredditSelector"
+  component={CollegeSubredditSelector}
+/>
+
+# CollegeSubredditSelector
+
+A `CollegeSubredditSelector` component is a type-ahead component
+that can be used to select from among a list of college CollegeSubredditSelector.
+Here is an example with fifteen schools (including all of the UCs, plus
+a few extra):
+ 
+export const Template = (args) => <CollegeSubredditSelector {...args} />;
+
+<Canvas>
+  <Story name="Fifteen Schools" args={{ label: "Fifteen Schools", subreddits: collegeSubredditFixtures.fifteen }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+
+This shows just the UCs:
+
+<Canvas>
+  <Story name="All UCs" args={{ label: "All UCs", subreddits: collegeSubredditFixtures.nineUCs }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+And for testing, when there is only one entry (UCSB):
+
+<Canvas>
+  <Story name="UCSB Only" args={{ label: "UCSB Only", subreddits: collegeSubredditFixtures.UCSB }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+

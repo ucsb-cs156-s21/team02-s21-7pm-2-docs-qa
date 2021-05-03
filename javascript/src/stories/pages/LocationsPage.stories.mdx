@@ -1,0 +1,29 @@
+import { Meta, Story, Canvas } from "@storybook/addon-docs/blocks";
+import HomePage from "main/pages/HomePage";
+import LocationsPage from "main/pages/LocationsPage";
+import { ToastProvider } from "react-toast-notifications";
+
+<Meta title="pages/LocationsPage" component={LocationsPage} />
+
+# LocationsPage
+
+The `LocationsPage` can be used to get data from the backend API
+endpoint `/api/locations`.   In the storybook, since a backend is 
+not running, filling out the form will result in a toast notifications
+with a `404` message that the api endpoint is unavailable.
+
+export const Template = (args) => {
+  return (
+    <>
+      <ToastProvider>
+        <LocationsPage {...args} />
+      </ToastProvider>
+    </>
+  );
+};
+
+<Canvas>
+  <Story name="Example" args={{ label: "Example" }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
