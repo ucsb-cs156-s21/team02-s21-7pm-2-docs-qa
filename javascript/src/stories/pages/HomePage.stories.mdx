@@ -1,0 +1,16 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import HomePage from "main/pages/HomePage";
+
+<Meta title="pages/HomePage" component={HomePage} />
+
+# HomePage
+
+The `HomePage` is the main page of the app:
+
+export const Template = (args) => <HomePage {...args} />
+
+<Canvas>
+  <Story name="Example" args={{ label: 'Example' }}>
+    {Template.bind({})}
+   </Story>
+</Canvas>

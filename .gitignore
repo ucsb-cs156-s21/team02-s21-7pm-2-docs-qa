@@ -1,3 +1,59 @@
+# Don't check in a built storybook
+
+javascript/storybook-static
+javascript/docs-build
+javascript/reports
+javascript/stryker-tmp
+
+# We don't want node_modules, package.json or package-lock.json at top level
+# Only under javascript/ directory
+
+node_modules
+package.json
+package-lock.json
+!javascript/package.json
+!javascript/package-lock.json
+
+# stryker temp files
+javascript/.stryker-tmp
+javascript/reports
+
+# No emacs backup files
+
+\#*\#
+*~
+
+# No vim temp files
+
+*.swo
+*.swp
+
+# No MacOS .DS_Store files
+.DS_Store
+
+
+# dependencies
+javascript/node_modules
+javascript/.pnp
+javascript/.pnp.js
+javascript/coverage
+javascript/.next/
+javascript/out/
+javascript/build
+javascript/.DS_Store
+javascript/.env*
+javascript/production.env
+javascript/npm-debug.log*
+javascript/yarn-debug.log*
+javascript/.now
+javascript/yarn-error.log*
+
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
 
 .factorypath
 

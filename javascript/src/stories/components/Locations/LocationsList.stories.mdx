@@ -1,0 +1,43 @@
+import { Meta, Story, Canvas } from "@storybook/addon-docs/blocks";
+import LocationsList from "main/components/Locations/LocationsList";
+import locationFixtures from "fixtures/locationFixtures"
+
+<Meta title="components/Locations/LocationsList" component={LocationsList} />
+
+# LocationsList
+
+An `LocationsList` component can be used list Locations in a table.
+
+export const Template = (args) => <LocationsList {...args} />
+
+A table with eight Locations looks like this:
+
+<Canvas>
+  <Story name="StorkeTower" args={{ label: 'Storke Tower' , data: locationFixtures.storkeTowerOne }}>
+    {Template.bind({})}
+   </Story>
+</Canvas>
+
+A table with a single Location looks like this:
+
+<Canvas>
+  <Story name="IslaVista" args={{ label: 'Isla Vista' , data: locationFixtures.islaVistaTwo }}>
+    {Template.bind({})}
+   </Story>
+</Canvas>
+
+An empty table looks like this:
+
+<Canvas>
+  <Story name="SantaBarbara" args={{ label: 'Santa Barbara' , data: locationFixtures.santaBarbaraTen }}>
+    {Template.bind({})}
+   </Story>
+</Canvas>
+
+And if you pass in null for the data, you get this:
+
+<Canvas>
+  <Story name="Null" args={{ label: 'Null', data: null }}>
+    {Template.bind({})}
+   </Story>
+</Canvas>

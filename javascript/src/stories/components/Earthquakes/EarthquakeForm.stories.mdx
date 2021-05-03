@@ -1,0 +1,28 @@
+import { Meta, Story, Canvas } from "@storybook/addon-docs/blocks";
+import EarthquakeForm from "main/components/Earthquakes/EarthquakeForm";
+const callback = (data) => window.alert("data=" + JSON.stringify(data));
+
+<Meta
+  title="components/Earthquakes/EarthquakeForm"
+  component={EarthquakeForm}
+/>
+
+# EarthquakeForm
+
+An `EarthquakeForm` component can be used to ask for the `distance`
+and `minMag` values that we need to pass the the api endpoint
+to get recent earthquakes.
+
+For purposes of the storybook, a callback function has been provided
+that uses `window.alert` to show the values that the callback would
+receive.  In a real usage, the form user provides a callback to use
+the values in whatever way they are needed (e.g. to fetch data from
+an API.)
+
+export const Template = (args) => <EarthquakeForm {...args} />;
+
+<Canvas>
+  <Story name="Example" args={{ label: "Example", submitCallback: callback }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>

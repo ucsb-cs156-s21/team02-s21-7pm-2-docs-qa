@@ -1,0 +1,26 @@
+import { Meta, Story, Canvas } from "@storybook/addon-docs/blocks";
+import CountrySelector from "main/components/CountryCodes/CountrySelector";
+import countryCodeFixtures from "fixtures/countryCodeFixtures";
+
+<Meta
+  title="components/CountryCodes/CountrySelector"
+  component={CountrySelector}
+/>
+
+# CountrySelector
+
+A `CountrySelector` component is a type-ahead component
+that can be used to select from among a list of countries, 
+thereby converting to a two letter country code.
+
+Here is an example with ten countries:
+ 
+export const Template = (args) => <CountrySelector {...args} />;
+
+<Canvas>
+  <Story name="Ten Countries" args={{ label: "Ten Countries", countries: countryCodeFixtures.tenCountries }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+

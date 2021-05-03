@@ -16,7 +16,7 @@
 
   <!-- (3) <artifactId/> -->
 
-  <artifactId>demo-spring-backend</artifactId>
+  <artifactId>team02</artifactId>
 
   <!-- (4) <version/> -->
   <version>1.0.0</version>
@@ -25,7 +25,7 @@
   <!-- (6) <name/> -->
   <!-- (7) <description/> -->
 
-  <description>Demonstration of Spring Boot Backend</description>
+  <description>Spring Boot Backend and Frontend (no logins or db)</description>
 
   <!-- (8) <url/> -->
   <!-- (9) <inceptionYear/> -->
@@ -96,6 +96,13 @@
   <!-- (26) <build/> -->
 
   <build>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
+    
     <plugins>
       <!-- Gives us: mvn spring-boot:run -->
       <plugin>
@@ -142,30 +149,96 @@
         </executions>
       </plugin>
 
-      <plugin>
-        <groupId>org.pitest</groupId>
-        <artifactId>pitest-maven</artifactId>
-        <version>1.6.4</version>
-        <configuration>
-          <targetClasses>
-            <param>edu.*</param>
-          </targetClasses>
-          <targetTests>
-            <param>edu.*</param>
-          </targetTests>
-          <outputFormats>
-            <outputFormat>HTML</outputFormat>
-            <outputFormat>CSV</outputFormat>
-            <outputFormat>XML</outputFormat>
-          </outputFormats>
-        </configuration>
-      </plugin>
-
 
     </plugins>
   </build>
 
   <!-- (27) <reporting/> -->
+
+
   <!-- (28) <profiles/> -->
+  <profiles>
+    <profile>
+      <id>localhost</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+    </profile>
+    <profile>
+      <id>heroku</id>
+      <activation>
+        <property>
+          <name>env.DYNO</name> <!-- should always be set on Heroku -->
+        </property>
+      </activation>
+      <build>
+        <resources>
+          <resource>
+            <directory>src/main/config/heroku</directory>
+          </resource>
+        </resources>
+        <plugins>
+          <plugin>
+            <groupId>com.github.eirslett</groupId>
+            <artifactId>frontend-maven-plugin</artifactId>
+            <version>1.6</version>
+            <configuration>
+              <workingDirectory>javascript</workingDirectory>
+              <installDirectory>${project.build.directory}</installDirectory>
+            </configuration>
+            <executions>
+              <execution>
+                <id>install node and npm</id>
+                <goals>
+                  <goal>install-node-and-npm</goal>
+                </goals>
+                <configuration>
+                  <nodeVersion>v12.12.0</nodeVersion>
+                  <npmVersion>6.14.3</npmVersion>
+                </configuration>
+              </execution>
+              <execution>
+                <id>npm install</id>
+                <goals>
+                  <goal>npm</goal>
+                </goals>
+                <configuration>
+                  <arguments>ci</arguments>
+                </configuration>
+              </execution>
+              <execution>
+                <id>npm run build</id>
+                <goals>
+                  <goal>npm</goal>
+                </goals>
+                <configuration>
+                  <arguments>run build</arguments>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>3.0.0</version>
+            <executions>
+              <execution>
+                <phase>generate-resources</phase>
+                <configuration>
+                  <target>
+                    <copy todir="${project.build.directory}/classes/public">
+                      <fileset dir="${project.basedir}/javascript/build" />
+                    </copy>
+                  </target>
+                </configuration>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 
 </project>
